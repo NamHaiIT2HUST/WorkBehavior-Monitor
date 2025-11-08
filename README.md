@@ -75,29 +75,40 @@ cd WorkBehavior-Monitor
 
 ### 2. Tạo môi trường ảo (tùy chọn, khuyến khích)
 
-Sao chép mã
+Sao chép mã 
+
 python -m venv venv
+
 venv\Scripts\activate  # Nếu dùng Window
+
 hoặc
+
 source venv/bin/activate    # Nếu dùng Linux/Mac
 
 
 ### 3. Cài đặt thư viện cần thiết
 
 Nếu có file requirements.txt:
+
 Sao chép mã
+
 pip install -r requirements.txt
 
 Hoặc cài đặt thủ công:
+
 Sao chép mã
+
 pip install flask opencv-python numpy
 
 
 ### 4. Chạy hệ thống
 
 Sao chép mã
+
 python project/webserver.py
+
 Mở trình duyệt và truy cập địa chỉ:
+
 http://127.0.0.1:5000
 
 
@@ -115,24 +126,36 @@ Vào trang History để xem lịch sử làm việc chi tiết.
 
 ## 🧰 Công nghệ sử dụng
 Thành phần	Mô tả
+
 Python	Ngôn ngữ lập trình chính
+
 Flask	Framework web nhẹ và dễ triển khai
+
 OpenCV	Phát hiện chuyển động, khuôn mặt, khoảng cách
+
 SQLite	Lưu trữ dữ liệu cục bộ
+
 HTML / CSS	Xây dựng giao diện web
+
 HX711 Loadcell	Cảm biến vật lý giám sát tư thế và trọng lượng
 
 ## 🤝 Đóng góp & Phát triển
 Mọi ý tưởng, đóng góp hoặc báo lỗi đều được chào đón!
 
 Cách tham gia:
+
 Fork dự án về tài khoản của bạn.
+
 Tạo branch mới cho tính năng hoặc bản sửa lỗi.
+
 Commit & Push thay đổi.
+
 Tạo Pull Request để nhóm phát triển xem xét.
 
 ## 📜 Giấy phép
+
 Dự án được phát hành dưới giấy phép MIT License.
+
 Bạn có thể sử dụng, chỉnh sửa và phân phối cho mục đích học tập, nghiên cứu hoặc thương mại.
 
 ## 👨‍💻 Tác giả
