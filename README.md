@@ -77,9 +77,9 @@ cd WorkBehavior-Monitor
 
 Sao chép mã
 python -m venv venv
-venv\Scripts\activate        # Windows
+venv\Scripts\activate  # Nếu dùng Window
 hoặc
-source venv/bin/activate    # Linux/Mac
+source venv/bin/activate    # Nếu dùng Linux/Mac
 
 
 ### 3. Cài đặt thư viện cần thiết
@@ -137,5 +137,7 @@ Bạn có thể sử dụng, chỉnh sửa và phân phối cho mục đích h�
 
 ## 👨‍💻 Tác giả
 Nguyễn Đào Nam Hải
+
 🎓 Đại học Bách Khoa Hà Nội (HUST)
+
 📧 Liên hệ: GitHub - NamHaiIT2HUST
