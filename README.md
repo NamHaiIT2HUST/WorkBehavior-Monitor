@@ -78,7 +78,7 @@ cd WorkBehavior-Monitor
 Sao chép mã
 python -m venv venv
 venv\Scripts\activate        # Windows
-# hoặc
+hoặc
 source venv/bin/activate    # Linux/Mac
 
 
@@ -102,7 +102,7 @@ http://127.0.0.1:5000
 
 
 
-🧩 Cách sử dụng
+## 🧩 Cách sử dụng
 Chạy server Flask bằng webserver.py.
 
 Kết nối camera hoặc cảm biến Loadcell nếu có.
@@ -113,7 +113,7 @@ Dữ liệu sẽ tự động lưu trong file work_monitor.db hoặc work_sessio
 
 Vào trang History để xem lịch sử làm việc chi tiết.
 
-🧰 Công nghệ sử dụng
+## 🧰 Công nghệ sử dụng
 Thành phần	Mô tả
 Python	Ngôn ngữ lập trình chính
 Flask	Framework web nhẹ và dễ triển khai
@@ -122,24 +122,20 @@ SQLite	Lưu trữ dữ liệu cục bộ
 HTML / CSS	Xây dựng giao diện web
 HX711 Loadcell	Cảm biến vật lý giám sát tư thế và trọng lượng
 
-🤝 Đóng góp & Phát triển
+## 🤝 Đóng góp & Phát triển
 Mọi ý tưởng, đóng góp hoặc báo lỗi đều được chào đón!
 
 Cách tham gia:
-
 Fork dự án về tài khoản của bạn.
-
 Tạo branch mới cho tính năng hoặc bản sửa lỗi.
-
 Commit & Push thay đổi.
-
 Tạo Pull Request để nhóm phát triển xem xét.
 
-📜 Giấy phép
+## 📜 Giấy phép
 Dự án được phát hành dưới giấy phép MIT License.
 Bạn có thể sử dụng, chỉnh sửa và phân phối cho mục đích học tập, nghiên cứu hoặc thương mại.
 
-👨‍💻 Tác giả
+## 👨‍💻 Tác giả
 Nguyễn Đào Nam Hải
 🎓 Đại học Bách Khoa Hà Nội (HUST)
 📧 Liên hệ: GitHub - NamHaiIT2HUST
