@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work Session Monitor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        #startBtn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        #startBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+        }
+
+        #stopBtn {
+            background: linear-gradient(45deg, #f44336, #da190b);
+            color: white;
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        #stopBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.5);
+        }
+
+        #checkBtn {
+            background: linear-gradient(45deg, #2196F3, #0b7dda);
+            color: white;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        #checkBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.5);
+        }
+
+        #historyBtn {
+            background: linear-gradient(45deg, #FF9800, #e68900);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        #historyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+        }
+
+        button:disabled {
+            background: linear-gradient(45deg, #ccc, #999);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        button:disabled::before {
+            display: none;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #status {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            min-height: 25px;
+        }
+
+        .distance-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #distance {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            min-height: 25px;
+        }
+
+        .warning {
+            color: #f44336;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Work Session Monitor</h1>
+        
+        <div class="button-group">
+            <button id="startBtn">
+                <span class="icon">▶️</span>Start Work
+            </button>
+            <button id="stopBtn" disabled>
+                <span class="icon">⏹️</span>Stop Work
+            </button>
+            <button id="checkBtn">
+                <span class="icon">📏</span>Check Distance
+            </button>
+            <button id="historyBtn" onclick="window.location.href='/history'">
+                <span class="icon">📊</span>View History
+            </button>
+        </div>
+
+        <div class="status-card">
+            <div id="status">Ready to start work session</div>
+        </div>
+
+        <div class="distance-card">
+            <div id="distance">Click "Check Distance" to measure</div>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const statusDiv = document.getElementById('status');
+        const distanceDiv = document.getElementById('distance');
+
+        startBtn.onclick = function() {
+            fetch('/start_work', {method: 'POST'})
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success) {
+                        statusDiv.innerHTML = `<span class="icon">✅</span>Work started at ${data.start_time}`;
+                        startBtn.disabled = true;
+                        stopBtn.disabled = false;
+                    } else {
+                        statusDiv.innerHTML = `<span class="icon">❌</span>${data.error}`;
+                    }
+                });
+        };
+
+        stopBtn.onclick = function() {
+            fetch('/stop_work', {method: 'POST'})
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success) {
+                        statusDiv.innerHTML = `<span class="icon">⏹️</span>Work stopped. Duration: ${data.duration}, Avg Distance: ${data.avg_distance}`;
+                        startBtn.disabled = false;
+                        stopBtn.disabled = true;
+                    } else {
+                        statusDiv.innerHTML = `<span class="icon">❌</span>${data.error}`;
+                    }
+                });
+        };
+
+        checkBtn.onclick = function() {
+            fetch('/check_distance')
+                .then(res => res.json())
+                .then(data => {
+                    if(data.distance > 0) {
+                        const warningClass = data.warning ? ' warning' : '';
+                        const warningIcon = data.warning ? '⚠️' : '✅';
+                        distanceDiv.innerHTML = `<span class="icon">${warningIcon}</span><span class="${warningClass}">Current Distance: ${data.distance.toFixed(1)}cm${data.warning ? ' (Too Close!)' : ''}</span>`;
+                    } else {
+                        distanceDiv.innerHTML = '<span class="icon">❌</span>No distance data.';
+                    }
+                });
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work Session History</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Work Session History</h1>
+        <button onclick="window.location.href='/'">Back</button>
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration</th>
+                    <th>Avg Distance</th>
+                    <th>Break Warnings</th>
+                    <th>Distance Warning</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        fetch('/api/history')
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.querySelector('#historyTable tbody');
+                tbody.innerHTML = '';
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${row.start_time}</td><td>${row.end_time}</td><td>${row.duration}</td><td>${row.avg_distance}</td><td>${row.break_warnings}</td><td>${row.distance_warning ? '⚠️' : ''}</td>`;
+                    tbody.appendChild(tr);
+                });
+            });
+    </script>
+</body>
+</html>

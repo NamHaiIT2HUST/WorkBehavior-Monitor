@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Work Session Monitor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Work Session Monitor</h1>
+        <div id="status"></div>
+        <button id="startBtn">Start Work</button>
+        <button id="stopBtn" disabled>Stop Work</button>
+        <button id="checkBtn">Check Distance</button>
+        <button id="historyBtn" onclick="window.location.href='/history'">View History</button>
+        <div id="distance"></div>
+    </div>
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const statusDiv = document.getElementById('status');
+        const distanceDiv = document.getElementById('distance');
+
+        startBtn.onclick = function() {
+            fetch('/start_work', {method: 'POST'})
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success) {
+                        statusDiv.innerText = 'Work started at ' + data.start_time;
+                        startBtn.disabled = true;
+                        stopBtn.disabled = false;
+                    } else {
+                        statusDiv.innerText = data.error;
+                    }
+                });
+        };
+        stopBtn.onclick = function() {
+            fetch('/stop_work', {method: 'POST'})
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success) {
+                        statusDiv.innerText = 'Work stopped. Duration: ' + data.duration + ', Avg Distance: ' + data.avg_distance;
+                        startBtn.disabled = false;
+                        stopBtn.disabled = true;
+                    } else {
+                        statusDiv.innerText = data.error;
+                    }
+                });
+        };
+        checkBtn.onclick = function() {
+            fetch('/check_distance')
+                .then(res => res.json())
+                .then(data => {
+                    if(data.distance > 0) {
+                        distanceDiv.innerText = 'Current Distance: ' + data.distance.toFixed(1) + 'cm' + (data.warning ? ' (Too Close!)' : '');
+                    } else {
+                        distanceDiv.innerText = 'No distance data.';
+                    }
+                });
+        };
+    </script>
+</body>
+</html>
