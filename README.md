@@ -42,29 +42,19 @@ Hệ thống có thể kết hợp với **camera**, **cảm biến khoảng cá
 
 ## 🧱 Cấu trúc thư mục
 
-WorkBehavior Monitor/   
-├─ Backup-2/
-├─ Backup-3/
-├─ Backup-4/
-├─ Backup-5/
-├─ HX711 Loadcell/
-│ ├─ hx711.py
-│ └─ main.py
-├─ project/
-│ ├─ database.py
-│ ├─ distance_utils.py
-│ ├─ session_monitor.py
-│ ├─ static/
-│ │ └─ style.css
-│ ├─ templates/
-│ │ ├─ history.html
-│ │ └─ index.html
-│ ├─ test_webcam_index.py
-│ └─ webserver.py
-└─ README.md
-
-markdown
-Sao chép mã
+| Thư mục / Tệp | Mô tả |
+|----------------|--------|
+| `project/` | Thư mục chứa toàn bộ mã nguồn chính |
+| ├── `database.py` | Xử lý cơ sở dữ liệu SQLite |
+| ├── `distance_utils.py` | Hàm tính toán khoảng cách, chuyển động |
+| ├── `session_monitor.py` | Theo dõi thời gian làm việc |
+| ├── `static/` | Chứa tài nguyên tĩnh (CSS, JS, ảnh) |
+| ├── `templates/` | Các file HTML giao diện người dùng |
+| ├── `test_webcam_index.py` | Kiểm tra kết nối webcam |
+| └── `webserver.py` | Chạy ứng dụng Flask Web |
+| `HX711 Loadcell/` | Module cảm biến HX711 để giám sát tư thế |
+| `Backup-2/ ... Backup-5/` | Các bản sao lưu mã nguồn |
+| `README.md` | Tài liệu hướng dẫn |
 
 - `project/`: chứa mã nguồn chính của hệ thống web và xử lý dữ liệu.  
 - `HX711 Loadcell/`: module cảm biến đo lực / tư thế làm việc.  
